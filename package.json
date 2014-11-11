@@ -1,0 +1,52 @@
+{
+  "name": "logging-helpers",
+  "description": "Basic template helpers for printing messages out to the console. Useful for debugging context in templates. Should work with any template engine.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/logging-helpers",
+  "author": {
+    "name": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jonschlinkert/logging-helpers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/logging-helpers/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jonschlinkert/logging-helpers/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "keywords": [
+    "docs",
+    "helper",
+    "helpers",
+    "engine",
+    "lo-dash",
+    "lodash",
+    "handlebars",
+    "documentation",
+    "generate",
+    "generator",
+    "markdown",
+    "templates",
+    "verb"
+  ],
+  "dependencies": {
+    "chalk": "^0.5.1"
+  }
+}
