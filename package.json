@@ -1,23 +1,23 @@
 {
   "name": "logging-helpers",
   "description": "Basic template helpers for printing messages out to the console. Useful for debugging context in templates. Should work with any template engine.",
-  "version": "0.1.0",
-  "homepage": "https://github.com/jonschlinkert/logging-helpers",
+  "version": "0.1.1",
+  "homepage": "https://github.com/helpers/logging-helpers",
   "author": {
     "name": "Jon Schlinkert",
     "url": "https://github.com/jonschlinkert"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jonschlinkert/logging-helpers.git"
+    "url": "git://github.com/helpers/logging-helpers.git"
   },
   "bugs": {
-    "url": "https://github.com/jonschlinkert/logging-helpers/issues"
+    "url": "https://github.com/helpers/logging-helpers/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/jonschlinkert/logging-helpers/blob/master/LICENSE-MIT"
+      "url": "https://github.com/helpers/logging-helpers/blob/master/LICENSE-MIT"
     }
   ],
   "main": "index.js",

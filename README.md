@@ -80,14 +80,14 @@ Verb (lo-dash, with special delimiters to avoid delimiter collision in documenta
 
 
 ## Contributing
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/jonschlinkert/logging-helpers/issues)
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/helpers/logging-helpers/issues)
 
 ## Author
 
 **Jon Schlinkert**
  
-+ [github/jonschlinkert](https://github.com/jonschlinkert)
-+ [twitter/jonschlinkert](http://twitter.com/jonschlinkert) 
++ [github/helpers](https://github.com/helpers)
++ [twitter/helpers](http://twitter.com/helpers) 
 
 ## License
 Copyright (c) 2014 Jon Schlinkert  
