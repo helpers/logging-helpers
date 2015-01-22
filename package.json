@@ -1,7 +1,7 @@
 {
   "name": "logging-helpers",
   "description": "Basic template helpers for printing messages out to the console. Useful for debugging context in templates. Should work with any template engine.",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "homepage": "https://github.com/helpers/logging-helpers",
   "author": {
     "name": "Jon Schlinkert",
