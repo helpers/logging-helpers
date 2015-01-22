@@ -54,7 +54,7 @@ exports.debug = function(val) {
  *
  */
 
-exports.inspect = function(context, options) {
+exports._inspect = function(context, options) {
   context = JSON.stringify(context, null, 2);
   var ext = options
     && options.hash
