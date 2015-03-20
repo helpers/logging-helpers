@@ -4,46 +4,78 @@ var chalk = require('chalk');
 
 /**
  * ```js
- * // Handlebars
- * {{log "this is a message!"}}
- *
  * // Lo-Dash
  * <%= log("this is a message!") %>
  * <%= log("%j", foo) %>
+ *
+ * // Handlebars
+ * {{log "this is a message!"}}
  * ```
  */
 
-exports.log = function () {
+exports.log = function log_() {
   console.log.apply(console, arguments);
 };
 
-exports.info = function () {
+/**
+ * ```js
+ * // Lo-Dash
+ * <%= info("this is a message!") %>
+ * <%= info("%j", foo) %>
+ *
+ * // Handlebars
+ * {{info "this is a message!"}}
+ * ```
+ */
+
+exports.info = function info_() {
   arguments[0] = chalk.cyan(arguments[0]);
   console.log.apply(console, arguments);
 };
 
-exports.bold = function () {
+/**
+ * ```js
+ * // Lo-Dash
+ * <%= bold("this is a message!") %>
+ * <%= bold("%j", foo) %>
+ *
+ * // Handlebars
+ * {{bold "this is a message!"}}
+ * ```
+ */
+
+exports.bold = function bold_() {
   arguments[0] = chalk.bold(arguments[0]);
   console.log.apply(console, arguments);
 };
 
-exports.warn = function () {
+exports.warn = function warn_() {
   arguments[0] = chalk.yellow(arguments[0]);
   console.warn.apply(console, arguments);
 };
 
-exports.error = function () {
+exports.error = function error_() {
   arguments[0] = chalk.red(arguments[0]);
   console.error.apply(console, arguments);
 };
 
-exports.debug = function(val) {
+/**
+ * Outputs a debug statement with the current context,
+ * and/or `val`
+ */
+
+exports.debug = function debug_(val) {
+  var args = [].slice.call(arguments);
+
+  console.log();
   console.log('=================================');
-  console.log('context: ', this);
+  console.log('context: %j', this);
+  console.log();
   if (!isUndefined(val)) {
-    console.log('value: ', val);
+    console.log.apply(console, ['value: %j'].concat(val));
   }
   console.log('=================================');
+  console.log();
   return;
 };
 
@@ -51,22 +83,17 @@ exports.debug = function(val) {
  * Returns stringified JSON, wrapped in a markdown-formatted
  * codeblock, html pre tags, or nothing based on the `ext`
  * passed on the context.
- *
  */
 
-exports._inspect = function(context, options) {
+exports._inspect = function inspect_(context, options) {
   context = JSON.stringify(context, null, 2);
-  var ext = options
-    && options.hash
-    && options.hash.ext || 'html';
+  var ext = options && options.hash && options.hash.ext || 'html';
   return switchOutput(ext, context);
 };
 
 /**
  * Generate output for the `inspect` helper based on the
  * extension passed.
- *
- * @api private
  */
 
 function switchOutput(ext, res) {
