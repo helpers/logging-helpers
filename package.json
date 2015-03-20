@@ -1,7 +1,7 @@
 {
   "name": "logging-helpers",
   "description": "Basic template helpers for printing messages out to the console. Useful for debugging context in templates. Should work with any template engine.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "homepage": "https://github.com/helpers/logging-helpers",
   "author": {
     "name": "Jon Schlinkert",
@@ -16,19 +16,25 @@
   },
   "license": {
     "type": "MIT",
-    "url": "https://github.com/helpers/logging-helpers/blob/master/LICENSE-MIT"
+    "url": "https://github.com/helpers/logging-helpers/blob/master/LICENSE"
   },
+  "files": [
+    "index.js"
+  ],
   "main": "index.js",
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha -R spec"
+    "test": "mocha"
+  },
+  "dependencies": {
+    "chalk": "^1.0.0"
   },
   "devDependencies": {
-    "handlebars": "^2.0.0",
-    "mocha": "*",
-    "should": "*"
+    "handlebars": "^3.0.0",
+    "mocha": "^2.2.1",
+    "should": "^5.2.0"
   },
   "keywords": [
     "assemble",
@@ -50,8 +56,5 @@
     "template",
     "templates",
     "verb"
-  ],
-  "dependencies": {
-    "chalk": "^0.5.1"
-  }
+  ]
 }
