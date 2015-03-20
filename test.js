@@ -1,5 +1,6 @@
 'use strict';
 
+/* deps:mocha */
 var should = require('should');
 var Handlebars = require('handlebars');
 Handlebars.registerHelper(require('./'));
