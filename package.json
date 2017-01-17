@@ -3,21 +3,12 @@
   "description": "Basic template helpers for printing messages out to the console. Useful for debugging context in templates. Should work with any template engine.",
   "version": "0.4.0",
   "homepage": "https://github.com/helpers/logging-helpers",
-  "author": {
-    "name": "Jon Schlinkert",
-    "url": "https://github.com/jonschlinkert"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/helpers/logging-helpers.git"
-  },
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "repository": "helpers/logging-helpers",
   "bugs": {
     "url": "https://github.com/helpers/logging-helpers/issues"
   },
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/helpers/logging-helpers/blob/master/LICENSE"
-  },
+  "license": "MIT",
   "files": [
     "index.js"
   ],
@@ -52,6 +43,7 @@
     "lo",
     "lo-dash",
     "lodash",
+    "logging",
     "markdown",
     "template",
     "templates",
