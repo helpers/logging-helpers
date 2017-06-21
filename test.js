@@ -1,31 +1,89 @@
 'use strict';
 
-/* deps:mocha */
-var should = require('should');
-var Handlebars = require('handlebars');
-Handlebars.registerHelper(require('./'));
+require('mocha');
+var assert = require('assert');
+var handlebars = require('handlebars');
+var isObject = require('isobject');
+var helpers = require('./');
+var error = console.error;
+var log = console.log;
 
-var log = console ? console.log : function() {};
-log.history = [];
+function render(str, ctx) {
+  var hbs = handlebars.create();
+  hbs.registerHelper(helpers);
+  return hbs.compile(str)(ctx);
+}
 
-console.log = function() {
-  log.history.push.apply(log.history, arguments);
-  log.apply(console, arguments);
-};
+describe('logging helpers', function() {
+  beforeEach(function() {
+    error.history = [];
+    log.history = [];
 
-describe('{{log}}', function() {
-  it('should log a message to the console.', function() {
-    var template = Handlebars.compile('{{log "Log helper worked!"}}');
-    template();
-    log.history.should.containEql('Log helper worked!');
+    console.log = function() {
+      var args = helpers.createArgs([].slice.call(arguments));
+      log.apply(console, args);
+      log.history.push.apply(log.history, args);
+    };
+
+    console.error = function() {
+      var args = helpers.createArgs([].slice.call(arguments));
+      error.history.push.apply(error.history, args);
+      error.apply(console, args);
+    };
+  });
+
+  afterEach(function() {
+    console.error = error;
+    console.log = log;
+  });
+
+  describe('{{log}}', function() {
+    it('should log a message to stdout', function() {
+      render('{{log "Log helper worked!"}}');
+      assert(/Log helper worked!/.test(log.history.join('')));
+    });
+  });
+
+  describe('{{warn}}', function() {
+    it('should log a warning message to stdout', function() {
+      render('{{warn "warn helper worked!"}}');
+      assert(/warn helper worked!/.test(error.history.join('')));
+    });
+  });
+
+  describe('{{success}}', function() {
+    it('should log a success message to stdout', function() {
+      render('{{success "success helper worked!"}}');
+      assert(/success helper worked!/.test(log.history.join('')));
+    });
+  });
+
+  describe('{{ok}}', function() {
+    it('should log an "ok" message to stdout', function() {
+      render('{{ok "ok helper worked!"}}');
+      assert(/ok helper worked!/.test(log.history.join('')));
+    });
+  });
+
+  describe('{{info}}', function() {
+    it('should log an info message to stdout', function() {
+      render('{{info "info helper worked!"}}');
+      assert(/info helper worked!/.test(log.history.join('')));
+    });
+  });
+
+  describe('{{error}}', function() {
+    it('should log an error message to stdout', function() {
+      render('{{error "error helper worked!"}}');
+      assert(/error helper worked!/.test(error.history.join('')));
+    });
+  });
+
+  describe('{{_debug}}', function() {
+    it('should log current context to stderr', function() {
+      render('{{_debug this}}', 'foo');
+      assert(/foo/.test(error.history.join('')));
+    });
   });
 });
 
-log.history = [];
-describe('{{debug}}', function() {
-  it('should log current context.', function() {
-    var template = Handlebars.compile('{{debug this}}');
-    template('assemble');
-    log.history.should.containEql('assemble');
-  });
-});
