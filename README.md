@@ -1,44 +1,62 @@
-# logging-helpers [![NPM version](https://badge.fury.io/js/logging-helpers.svg)](http://badge.fury.io/js/logging-helpers)  [![Build Status](https://travis-ci.org/helpers/logging-helpers.svg)](https://travis-ci.org/helpers/logging-helpers) 
+# logging-helpers [![NPM version](https://img.shields.io/npm/v/logging-helpers.svg?style=flat)](https://www.npmjs.com/package/logging-helpers) [![NPM monthly downloads](https://img.shields.io/npm/dm/logging-helpers.svg?style=flat)](https://npmjs.org/package/logging-helpers) [![NPM total downloads](https://img.shields.io/npm/dt/logging-helpers.svg?style=flat)](https://npmjs.org/package/logging-helpers) [![Linux Build Status](https://img.shields.io/travis/helpers/logging-helpers.svg?style=flat&label=Travis)](https://travis-ci.org/helpers/logging-helpers)
 
 > Basic template helpers for printing messages out to the console. Useful for debugging context in templates. Should work with any template engine.
 
-## Install with [npm](npmjs.org)
+## Install
 
-```bash
-npm i logging-helpers --save
+Install with [npm](https://www.npmjs.com/):
+
+```sh
+$ npm install --save logging-helpers
 ```
 
-## Related helper projects
-* [handlebars-helpers](https://github.com/assemble/handlebars-helpers): 120+ Handlebars helpers in ~20 categories, for Assemble, YUI, Ghost or any Handlebars project. Includes helpers like {{i18}}, {{markdown}}, {{relative}}, {{extend}}, {{moment}}, and so on.
-* [template-helpers](https://github.com/jonschlinkert/template-helpers): Generic JavaScript helpers that can be used with any template engine. Handlebars, Lo-Dash, Underscore, or any engine that supports helper functions.
+## Usage
 
-## Usage examples
+The main export is the `log` helper function with other helpers decorated as properties on this function. Some apps, like [assemble](https://github.com/assemble/assemble), [verb](https://github.com/verbose/verb) and [generate](https://github.com/generate/generate) support this format. However, a non-enumberalbe `toObject` method is exposed for registering directly with engines like [handlebars](http://www.handlebarsjs.com/)
+
+Example:
+
+```js
+var loggingHelpers = require('logging-helpers');
+var hbs = require('handlebars');
+
+hbs.registerHelper('log', helpers);
+// register all of the other helpers
+hbs.registerHelper(helpers.toObject);
+```
+
+## Template examples
 
 Handlebars:
 
 ```handlebars
 {{log "%s" "this is a message"}}
 {{info "%s" "this is a message"}}
-{{bold "%s" "this is a message"}}
-{{warn "%s" "this is a message"}}
+{{warning "%s" "this is a message"}}
+{{warn "%s" "this is a message"}}  <!-- alias for "warning" -->
+{{success "%s" "this is a message"}}
 {{error "%s" "this is a message"}}
-{{debug this}}
-{{inspect foo.bar}}
+{{danger "%s" "this is a message"}}  <!-- alias for "error" -->
+{{ok "%s" "this is a message"}}
+{{bold "%s" "this is a message"}}
+{{_debug this}}
+{{_inspect foo.bar}}
 ```
 
 Lo-Dash or Underscore:
 
 ```html
-<%%= log("%s", "this is a message") %>
-<%%= info("%s", "this is a message") %>
-<%%= bold("%s", "this is a message") %>
-<%%= warn("%s", "this is a message") %>
-<%%= error("%s", "this is a message") %>
-<%%= debug(data) %>
-<%%= inspect(foo.bar) %>
+<%= log("%s", "this is a message") %>
+<%= info("%s", "this is a message") %>
+<%= warn("%s", "this is a message") %>
+<%= warning("%s", "this is a message") %>
+<%= error("%s", "this is a message") %>
+<%= bold("%s", "this is a message") %>
+<%= _debug(data) %>
+<%= _inspect(foo.bar) %>
 ```
 
-Verb (lo-dash, with special delimiters to avoid delimiter collision in documentation):
+[Verb](https://github.com/verbose/verb) (uses lodash-style templates, but with special delimiters to avoid delimiter collision in documentation):
 
 ```js
 {%= log("%s", "this is a message") %}
@@ -50,57 +68,69 @@ Verb (lo-dash, with special delimiters to avoid delimiter collision in documenta
 {%= inspect(foo.bar) %}
 ```
 
+## Usage with [assemble](https://github.com/assemble/assemble)
 
-## Register the helper
-
-> This should work with any engine, here are a few examples
-
-### [template](https://github.com/jonschlinkert/template)
+This should work with [assemble](https://github.com/assemble/assemble), [verb](https://github.com/verbose/verb), [generate](https://github.com/generate/generate), [update](https://github.com/update/update) or any application based on [templates](https://github.com/jonschlinkert/templates).
 
 ```js
-template.helpers('logging-helpers', require('logging-helpers'));
+var helpers = require('logging-helpers');
+var assemble = require('assemble');
+var app = assemble();
+app.helpers(helpers);
 ```
 
-### [assemble](https://github.com/assemble/assemble)
+You can now use the helpers like this:
 
-```js
-assemble.helpers('logging-helpers', require('logging-helpers'));
+```handlebars
+{{log "%s" "this is a message"}}
+{{info "%s" "this is a message"}}
+{{warning "%s" "this is a message"}}
+{{warn "%s" "this is a message"}}  <!-- alias for "warning" -->
+{{success "%s" "this is a message"}}
+{{error "%s" "this is a message"}}
+{{danger "%s" "this is a message"}}  <!-- alias for "error" -->
+{{ok "%s" "this is a message"}}
+{{bold "%s" "this is a message"}}
+{{_debug this}}
+{{_inspect foo.bar}}
 ```
 
-### [verb](https://github.com/jonschlinkert/verb)
+## About
 
-```js
-verb.helpers('logging-helpers', require('logging-helpers'));
+### Contributing
+
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](../../issues/new).
+
+### Building docs
+
+_(This project's readme.md is generated by [verb](https://github.com/verbose/verb-generate-readme), please don't edit the readme directly. Any changes to the readme must be made in the [.verb.md](.verb.md) readme template.)_
+
+To generate the readme, run the following command:
+
+```sh
+$ npm install -g verbose/verb#dev verb-generate-readme && verb
 ```
 
-### [handlebars](https://github.com/wycats/handlebars.js/)
+### Running tests
 
-```js
-var handlebars = require('handlebars');
-handlebars.registerHelper('logging-helpers', require('logging-helpers'));
+Running and reviewing unit tests is a great way to get familiarized with a library and its API. You can install dependencies and run tests with the following command:
+
+```sh
+$ npm install && npm test
 ```
 
-## Running tests
-Install dev dependencies.
-
-```bash
-npm i -d && npm test
-```
-
-## Contributing
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/helpers/logging-helpers/issues)
-
-## Author
+### Author
 
 **Jon Schlinkert**
- 
-+ [github/helpers](https://github.com/helpers)
-+ [twitter/helpers](http://twitter.com/helpers) 
 
-## License
-Copyright (c) 2014-2015 Jon Schlinkert  
-Released under the MIT license
+* [github/jonschlinkert](https://github.com/jonschlinkert)
+* [twitter/jonschlinkert](https://twitter.com/jonschlinkert)
+
+### License
+
+Copyright © 2017, [Jon Schlinkert](https://github.com/jonschlinkert).
+Released under the [MIT License](LICENSE).
 
 ***
 
-_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on March 20, 2015._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on June 21, 2017._
