@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "isobject": "^3.0.0",
-    "log-utils": "^0.2.1"
+    "log-utils": "^0.3.0"
   },
   "devDependencies": {
     "engine-base": "^0.1.3",
